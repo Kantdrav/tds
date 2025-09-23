@@ -1,0 +1,50 @@
+Great! You have the JSON body ready to get embeddings. Here’s how to actually send this request and get the embeddings using the terminal with curl (or any HTTP client):
+Using curl in terminal
+
+    Save your JSON body in a file called, for example, embedding_request.json:
+
+{
+  "model": "text-embedding-3-small",
+  "input": [
+    "Dear user, please verify your transaction code 76713 sent to 21f3002792@ds.study.iitm.ac.in",
+    "Dear user, please verify your transaction code 47159 sent to 21f3002792@ds.study.iitm.ac.in"
+  ]
+}
+
+    Run this curl command, replacing YOUR_API_KEY with your actual OpenAI API key:
+
+curl https://api.openai.com/v1/embeddings \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d @embedding_request.json
+
+What happens next?
+
+    The API responds with a JSON containing embeddings (vectors) for each input text.
+
+    You can then feed these embeddings into your fraud detection ML model.
+
+If you want to do it programmatically (Python example):
+
+import requests
+
+api_key = "YOUR_API_KEY"
+url = "https://api.openai.com/v1/embeddings"
+
+headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json",
+}
+
+data = {
+    "model": "text-embedding-3-small",
+    "input": [
+        "Dear user, please verify your transaction code 76713 sent to 21f3002792@ds.study.iitm.ac.in",
+        "Dear user, please verify your transaction code 47159 sent to 21f3002792@ds.study.iitm.ac.in"
+    ]
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+
+Let me know if you want me to help with other languages or tools!

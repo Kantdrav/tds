@@ -1,0 +1,92 @@
+can i do these things using terminal
+ChatGPT said:
+
+Yes, you can do everything from the terminal—including creating the file, installing dependencies, and running the FastAPI server. Here's a full step-by-step guide:
+✅ 1. Open Terminal and Create Project Folder
+
+mkdir fastapi-students
+cd fastapi-students
+
+✅ 2. Move Your CSV File Here
+
+If you're already in the folder where q-fastapi.csv is saved (e.g., your downloads), run:
+
+mv /path/to/q-fastapi.csv ./  # Replace with actual path if needed
+
+Or manually move q-fastapi.csv into the fastapi-students folder using your file manager.
+✅ 3. Create the FastAPI Server File
+
+nano main.py
+
+Paste this code into nano:
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from typing import List
+import csv
+
+app = FastAPI()
+
+# CORS setup
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET"],
+    allow_headers=["*"]
+)
+
+# Load CSV data
+students_data = []
+with open("q-fastapi.csv", newline="") as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        row["studentId"] = int(row["studentId"])
+        students_data.append(row)
+
+@app.get("/api")
+def get_students(class_: List[str] = None):
+    if class_:
+        filtered = [s for s in students_data if s["class"] in class_]
+        return {"students": filtered}
+    return {"students": students_data}
+
+Then save and exit:
+
+    Press Ctrl + O, hit Enter to save.
+
+    Press Ctrl + X to exit.
+
+✅ 4. Create a Virtual Environment (Optional but Recommended)
+
+python -m venv venv
+source venv/bin/activate
+
+✅ 5. Install Dependencies
+
+pip install fastapi uvicorn
+
+✅ 6. Run the Server
+
+uvicorn main:app --reload
+
+This will start the server at:
+
+http://127.0.0.1:8000/api
+
+✅ 7. Test API in Browser or cURL
+
+    All students:
+
+http://127.0.0.1:8000/api
+
+Filter by class:
+
+    http://127.0.0.1:8000/api?class=1A
+    http://127.0.0.1:8000/api?class=1A&class=1B
+
+Or use curl:
+
+curl "http://127.0.0.1:8000/api?class=1A"
+
+Let me know if you want to auto-reload CSV on changes, or add POST support to update the file.
+

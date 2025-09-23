@@ -1,0 +1,238 @@
+kantdravi@kantdravi-LOQ-15ARP9:~$ docker login
+
+USING WEB-BASED LOGIN
+
+i Info → To sign in with credentials on the command line, use 'docker login -u <username>'
+         
+
+Your one-time device confirmation code is: WPLB-VTNN
+Press ENTER to open your browser or submit your device code here: https://login.docker.com/activate
+
+Waiting for authentication in the browser…
+
+
+WARNING! Your credentials are stored unencrypted in '/home/kantdravi/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
+kantdravi@kantdravi-LOQ-15ARP9:~$ docker build -t $USER/$REPO:21f3002792 .
+docker push $USER/$REPO:21f3002792
+ERROR: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Head "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied
+invalid reference format
+kantdravi@kantdravi-LOQ-15ARP9:~$ sudo usermod -aG docker $USER
+[sudo] password for kantdravi: 
+kantdravi@kantdravi-LOQ-15ARP9:~$ sudo docker build -t $USER/$REPO:21f3002792 .
+sudo docker push $USER/$REPO:21f3002792
+[+] Building 0.0s (0/0)                                                                                                                   docker:default
+ERROR: invalid tag "kantdravi/:21f3002792": invalid reference format
+invalid reference format
+kantdravi@kantdravi-LOQ-15ARP9:~$ export REPO=myapp   # Replace 'myapp' with your actual Docker Hub repo name
+kantdravi@kantdravi-LOQ-15ARP9:~$ sudo docker build -t $USER/$REPO:21f3002792 .
+sudo docker push $USER/$REPO:21f3002792
+[+] Building 32.6s (5/5) FINISHED                                                                                                         docker:default
+ => [internal] load build definition from Dockerfile                                                                                                0.0s
+ => => transferring dockerfile: 92B                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest                                                                                   20.4s
+ => [internal] load .dockerignore                                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                                     0.0s
+ => [1/1] FROM docker.io/library/alpine:latest@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c                             12.1s
+ => => resolve docker.io/library/alpine:latest@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c                              0.0s
+ => => sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c 9.22kB / 9.22kB                                                      0.0s
+ => => sha256:1c4eef651f65e2f7daee7ee785882ac164b02b78fb74503052a26dc061c90474 1.02kB / 1.02kB                                                      0.0s
+ => => sha256:aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b 581B / 581B                                                          0.0s
+ => => sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870 3.64MB / 3.64MB                                                     11.9s
+ => => extracting sha256:f18232174bc91741fdf3da96d85011092101a032a93a388b79e99e69c2d5c870                                                           0.1s
+ => exporting to image                                                                                                                              0.0s
+ => => exporting layers                                                                                                                             0.0s
+ => => writing image sha256:0de35e902543bc2d42c99b5db312b77c9a4b3b5b760ed2c5bfb74c65c52e513d                                                        0.0s
+ => => naming to docker.io/kantdravi/myapp:21f3002792                                                                                               0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 2)
+The push refers to repository [docker.io/kantdravi/myapp]
+08000c18d16d: Preparing 
+denied: requested access to the resource is denied
+kantdravi@kantdravi-LOQ-15ARP9:~$ docker whoami
+docker: unknown command: docker whoami
+
+Run 'docker --help' for more information
+kantdravi@kantdravi-LOQ-15ARP9:~$ docker info
+Client: Docker Engine - Community
+ Version:    28.1.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.23.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.35.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.49/info": dial unix /var/run/docker.sock: connect: permission denied
+kantdravi@kantdravi-LOQ-15ARP9:~$ sudo docker info
+Client: Docker Engine - Community
+ Version:    28.1.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.23.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.35.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 1
+ Server Version: 28.1.1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 05044ec0a9a75232cad458027ca83437aae3f4da
+ runc version: v1.2.5-0-g59923ef
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.11.0-25-generic
+ Operating System: Ubuntu 24.04.2 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 16
+ Total Memory: 23.16GiB
+ Name: kantdravi-LOQ-15ARP9
+ ID: 825f3ec4-6c80-4316-acf1-49742905ebde
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+kantdravi@kantdravi-LOQ-15ARP9:~$ sudo docker login
+
+USING WEB-BASED LOGIN
+
+i Info → To sign in with credentials on the command line, use 'docker login -u <username>'
+         
+
+Your one-time device confirmation code is: CWKX-WZXD
+Press ENTER to open your browser or submit your device code here: https://login.docker.com/activate
+
+Waiting for authentication in the browser…
+
+
+
+WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
+kantdravi@kantdravi-LOQ-15ARP9:~$ sudo docker info
+Client: Docker Engine - Community
+ Version:    28.1.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.23.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.35.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 1
+ Server Version: 28.1.1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 05044ec0a9a75232cad458027ca83437aae3f4da
+ runc version: v1.2.5-0-g59923ef
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.11.0-25-generic
+ Operating System: Ubuntu 24.04.2 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 16
+ Total Memory: 23.16GiB
+ Name: kantdravi-LOQ-15ARP9
+ ID: 825f3ec4-6c80-4316-acf1-49742905ebde
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Username: kantdravi
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+kantdravi@kantdravi-LOQ-15ARP9:~$ sudo docker build -t kantdravi/myapp:21f3002792 .
+sudo docker push kantdravi/myapp:21f3002792
+[+] Building 2.6s (6/6) FINISHED                                                                                                          docker:default
+ => [internal] load build definition from Dockerfile                                                                                                0.0s
+ => => transferring dockerfile: 92B                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest                                                                                    2.5s
+ => [auth] library/alpine:pull token for registry-1.docker.io                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                                     0.0s
+ => CACHED [1/1] FROM docker.io/library/alpine:latest@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c                       0.0s
+ => exporting to image                                                                                                                              0.0s
+ => => exporting layers                                                                                                                             0.0s
+ => => writing image sha256:0de35e902543bc2d42c99b5db312b77c9a4b3b5b760ed2c5bfb74c65c52e513d                                                        0.0s
+ => => naming to docker.io/kantdravi/myapp:21f3002792                                                                                               0.0s
+
+ 1 warning found (use docker --debug to expand):
+ - JSONArgsRecommended: JSON arguments recommended for CMD to prevent unintended behavior related to OS signals (line 2)
+The push refers to repository [docker.io/kantdravi/myapp]
+08000c18d16d: Mounted from library/alpine 
+21f3002792: digest: sha256:ace639ede32398a95458cf19240e918073bc6f2cf8d445b67fea0a585cba86bf size: 527
+kantdravi@kantdravi-LOQ-15ARP9:~$ 
+

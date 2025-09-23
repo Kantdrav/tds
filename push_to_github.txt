@@ -1,0 +1,12 @@
+ome/kantdravi/Desktop/TDS/.git/
+kantdravi@kantdravi-LOQ-15ARP9:~/Desktop/TDS$ git add mistral_gemma_notes.md
+kantdravi@kantdravi-LOQ-15ARP9:~/Desktop/TDS$ git commit -m " notes on Mistral and Gemma"
+[master (root-commit) 8e9a94f]  notes on Mistral and Gemma
+ 1 file changed, 200 insertions(+)
+ create mode 100644 mistral_gemma_notes.md
+kantdravi@kantdravi-LOQ-15ARP9:~/Desktop/TDS$ git remote add origin https://github.com/Kantdrav/tds.git
+kantdravi@kantdravi-LOQ-15ARP9:~/Desktop/TDS$ git branch -M main
+kantdravi@kantdravi-LOQ-15ARP9:~/Desktop/TDS$ git push -u origin main
+To https://github.com/Kantdrav/tds.git
+ ! [rejected]        main -> main (fetch first)
+
